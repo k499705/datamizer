@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <title>Datanon - Anonimizador de datos</title>
+        <link rel="shortcut icon" href="static/img/favicon.ico"/>
+        <meta name="description" content="Aplicacion para enmascarar datos de caracter personal"/>
+        <meta name="author" content="AMM"/>
+        <link rel="stylesheet" href="static/css/main.css"/>
+        <script src="static/js/jquery-3.1.1.min.js"></script>
+        <script src="static/js/jquery-ui.min.js" defer="defer"></script>
+    </h:head>
+    <body>
+        <header>
+                <img src="static/img/logo.png" alt="DATANON" />
+        </header>
+        <main role="main">
+            <ui:insert name="content">Content</ui:insert>
+            <h:messages infoClass="msgBox_ok" warnClass="msgBox_warning" errorClass="msgBox_error" globalOnly="true" showDetail="true" showSummary="true" />
+        </main>
+    </body>
+</html>

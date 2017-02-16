@@ -1,5 +1,12 @@
 /*
-DATANON -  AMM 2017
+ *      ___      _                          
+ *     /   \__ _| |_ __ _ _ __   ___  _ __  
+ *    / /\ / _` | __/ _` | '_ \ / _ \| '_ \ 
+ *   / /_// (_| | || (_| | | | | (_) | | | |
+ *  /___,' \__,_|\__\__,_|_| |_|\___/|_| |_|
+ *                                          
+ *  DATANON -  AMM 2017
+ *  CSS style sheet
 */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
@@ -15,4 +22,19 @@ body {
 
 main {
     padding: 50px 10px 10px 20px;
+}
+
+#uploadbox {
+    position: relative;
+    height: 300px;
+    width: 50%;
+    border: 1px solid #222;
+    border-radius: 5px;
+    padding: 5px;
+    transition: .3s;
+    background-color: #ddd;
+}
+
+#uploadstatus {
+    display: none;
 }

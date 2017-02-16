@@ -4,7 +4,20 @@
                 template="WEB-INF/templates/main.xhtml">
     <ui:define name="content">
         <section>
-            AQUI VA EL CONTENIDO POR EJEMPLO!
+            <div id="uploadbox">
+                <p id="uploadbox_msg">Arrastra el archivo con datos aqui</p>
+                <div id="uploadbox_icon"></div>
+                <div id="uploadstatus">
+                    <progress class="progressBar" value="0" max="100">0%</progress>
+                    <p id="nombre">Archivo: </p>
+                    <p id="tipo">Tipo: </p>
+                    <p id="tam">Tamaño: </p>
+                </div>
+                <h:form id="uploadForm">
+                    <h:commandButton id="subidaCompleta" type="submit" value="OK" style="display:none" >
+                    </h:commandButton>
+                </h:form>
+            </div>
         </section>
     </ui:define>
 </ui:composition>

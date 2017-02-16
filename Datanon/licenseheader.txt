@@ -1,0 +1,12 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}    ___      _                          
+${licensePrefix}   /   \__ _| |_ __ _ _ __   ___  _ __  
+${licensePrefix}   / /\ / _` | __/ _` | '_ \ / _ \| '_ \ 
+${licensePrefix} / /_// (_| | || (_| | | | | (_) | | | |
+${licensePrefix} /___,' \__,_|\__\__,_|_| |_|\___/|_| |_|
+${licensePrefix}                                         
+<#if licenseLast??>
+${licenseLast}
+</#if>

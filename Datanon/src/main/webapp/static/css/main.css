@@ -35,6 +35,14 @@ main {
     background-color: #ddd;
 }
 
+#uploadbox:hover {
+    background-color: #F00;
+}
+
+#uploadbox:hover #uploadstatus {
+    background-color: #0F0;
+    display: block;
+}
 #uploadstatus {
     display: none;
 }

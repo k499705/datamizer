@@ -8,7 +8,8 @@
  */
 package com.datanon.algoritmos;
 
-import com.datanon.clasesestandar.Niveles;
+import com.datanon.algoritmos.excepciones.ParametroIncorrectoException;
+import com.datanon.util.Niveles;
 
 /**
  *
@@ -17,10 +18,10 @@ import com.datanon.clasesestandar.Niveles;
 public interface Algoritmo {
     
     public String anonTotal (String valor, Niveles.Nivel nivel, boolean sensible);
-    public String anonNoAccion (String valor, Niveles.Nivel nivel, boolean sensible);
-    public String anonCaracter (String valor, Niveles.Nivel nivel, boolean sensible);
-    public String anonPalabra (String valor, Niveles.Nivel nivel, boolean sensible);
-    public String anonNumeros (String valor, Niveles.Nivel nivel, boolean sensible);
+    public String anonNoAccion (String valor, Niveles.Nivel nivel, boolean sensible) throws ParametroIncorrectoException;
+    public String anonCaracter (String valor, Niveles.Nivel nivel, boolean sensible) throws ParametroIncorrectoException;
+    public String anonPalabra (String valor, Niveles.Nivel nivel, boolean sensible) throws ParametroIncorrectoException;
+    public String anonEdad (String valor, Niveles.Nivel nivel, boolean sensible) throws ParametroIncorrectoException;
     
     
     

@@ -6,7 +6,7 @@
  *  /___,' \__,_|\__\__,_|_| |_|\___/|_| |_|
  *                                          
  */
-package com.datanon.clasesestandar;
+package com.datanon.util;
 
 /**
  *

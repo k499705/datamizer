@@ -138,16 +138,16 @@ public class AlgoritmoEstandar implements Niveles, Algoritmo {
              case ALTO:
                  
                  if (anonimizadoint < 20) {
-                     anonimizado = "<" + 20;
+                     anonimizado = "< 20";
                  }
                  if (anonimizadoint < 50) {
-                     anonimizado = "<" + 50;
+                     anonimizado = "< 50";
                  }
                  if (anonimizadoint < 70) {
-                     anonimizado = "<" + 70;
+                     anonimizado = "< 70";
                  }
                  else{
-                 anonimizado = ">" + 70;
+                 anonimizado = "> 70";
                  }
                  break;
             }

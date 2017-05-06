@@ -36,13 +36,33 @@ main {
 }
 
 #uploadbox:hover {
-    background-color: #F00;
 }
 
 #uploadbox:hover #uploadstatus {
-    background-color: #0F0;
-    display: block;
 }
 #uploadstatus {
     display: none;
+}
+#section{
+    text-align: center;
+}
+#uploadbox_msg {
+    text-align: center;
+    font-size: larger;
+    color: #000;
+    display:block!important;
+    -webkit-transition:-webkit-transform 1s ease-out;
+    -moz-transition:-moz-transform 1s ease-out;
+    -o-transition:-o-transform 1s ease-out;
+    -ms-transition:-ms-transform 1s ease-out;
+    transition:transform 1s ease-out;
+}
+#uploadbox_msg:hover{
+    font-size: larger;
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1)
+    
 }

@@ -35,7 +35,9 @@ main {
     background-color: #ddd;
 }
 
-#uploadbox:hover {
+#uploadbox:hover #uploadbox_msg {
+    opacity: 1;
+    transform: scale(2); 
 }
 
 #uploadbox:hover #uploadstatus {
@@ -48,21 +50,10 @@ main {
 }
 #uploadbox_msg {
     text-align: center;
+    margin-top: 30px;
     font-size: larger;
     color: #000;
     display:block!important;
-    -webkit-transition:-webkit-transform 1s ease-out;
-    -moz-transition:-moz-transform 1s ease-out;
-    -o-transition:-o-transform 1s ease-out;
-    -ms-transition:-ms-transform 1s ease-out;
-    transition:transform 1s ease-out;
-}
-#uploadbox_msg:hover{
-    font-size: larger;
-    -moz-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1)
-    
+    transition: 0.3s ease-out;
+    opacity: 0;
 }

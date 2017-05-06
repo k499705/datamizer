@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <section>
+            <f:metadata>
+                <f:viewParam name="id" value="#{datosController.id}" required="false"/>
+                <f:viewAction action="#{datosController.loadDatos()}" />
+            </f:metadata>
+
+            <h:form id="previewForm" styleClass="preview">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Columna</th>
+                            <th>Tipo</th>
+                            <th>Nivel</th>
+                            <th>Ejemplo resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="#{datosController.cabecera}" var="cab" varStatus="cx">
+                            <tr>
+                                <td>#{cab}</td>
+                                <td>
+                                    <h:selectOneMenu value="TIPO" id="formtipo" >
+                                        <f:selectItem itemValue="Noaccion" itemLabel="No accion" />
+                                        <f:selectItem itemValue="Caracter" itemLabel="Caracter" />
+                                        <f:selectItem itemValue="Palabra" itemLabel="Palabra" />
+                                        <f:selectItem itemValue="Edad" itemLabel="Edad" />
+                                        <f:selectItem itemValue="Anontotal" itemLabel="Anonimizado total" />
+                                    </h:selectOneMenu>
+                                </td>
+                                <td>
+                                    <h:selectOneMenu value="NIVEL" id="formnivel" >
+                                        <f:selectItem itemValue="Leve" itemLabel="Leve" />
+                                        <f:selectItem itemValue="Medio" itemLabel="Medio" />
+                                        <f:selectItem itemValue="Alto" itemLabel="Alto" />
+                                    </h:selectOneMenu>
+                                </td>
+                                <td>#{datosController.creaEjemploResultado(cx.index)}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </h:form>
+        </section>
+    </ui:define>
+</ui:composition>

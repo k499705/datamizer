@@ -96,8 +96,14 @@ function uploadProgress(event) {
 // Function to execute when the upload is complete. It removes the progress bar
 // and simulates a click to refresh the list of files in the JSF page
 function uploadComplete(event, refreshButton) {
-    console.log("Subida completada!");
-    document.getElementById(refreshButton).click();
+    console.log(event);
+    console.log("Subida completada!!!");
+    console.log(event.target.response);
+    var url = 'preview.xhtml?id=' + event.target.response;
+    var link = $('<a/>').attr('href', url)[0];
+    console.log("Link: " + link);
+    link.click();
+    //document.getElementById(refreshButton).click();
 }
 
 // Function to execute when there has been an error in the upload.

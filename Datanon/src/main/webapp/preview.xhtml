@@ -19,8 +19,9 @@
                             <th>Columna</th>
                             <th>Tipo</th>
                             <th>Nivel</th>
+                            <th>¿Sensible?</th>
                             <th class="textocentrado">Ejemplo no anonimizado</th>
-                            <th class="textocentrado">Ejemplo anonimizado</th>
+                            <th class="textocentrado">Ejemplo anonimizado</th>                           
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,12 @@
                                         <f:selectItem itemValue="Medio" itemLabel="Medio" />
                                         <f:selectItem itemValue="Alto" itemLabel="Alto" />
                                     </h:selectOneMenu>
+                                </td>
+                                
+                                <td>
+                                    <h:selectBooleanCheckbox value="#{datosController.sensible[cx.index]}" id="sensitive">
+                                        <f:ajax render="@form" execute="@form"/>
+                                    </h:selectBooleanCheckbox> 
                                 </td>
                                 <td class="textocentrado">#{datosController.preEjemploResultado(cx.index)}</td>
                                 <td class="textocentrado">#{datosController.posEjemploResultado(cx.index, "Caracter", "Medio")}</td>

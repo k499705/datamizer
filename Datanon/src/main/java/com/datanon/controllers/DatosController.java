@@ -26,7 +26,7 @@ import com.datanon.util.Niveles.Nivel;
 import com.datanon.util.ReadConfig;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -49,6 +49,7 @@ public class DatosController implements Serializable {
     private String[] cabecera;
     private List<String[]> datos;
     private String[] ejemploResultado;
+    private boolean[] sensible;
 
     /**
      * Creates a new instance of DatosController
@@ -106,7 +107,11 @@ public class DatosController implements Serializable {
     }
 
     public String preEjemploResultado(int i) {
-        return ejemploResultado[i];
+        //return ejemploResultado[i];
+        if (sensible[i]) {
+            return "true";
+        }
+        else return "false";
     }
     
     public String posEjemploResultado (int i, String tipo, String nivel) throws ParametroIncorrectoException{
@@ -114,9 +119,8 @@ public class DatosController implements Serializable {
 //    System.out.println(i + " " + tipo + " " + nivel);
 //    System.out.println("size:" + ejemploResultado.length);
      Nivel level;
-     
      nivel = nivel.toUpperCase();
-     
+
         switch (nivel){
             
            case "LEVE": 
@@ -154,7 +158,28 @@ public class DatosController implements Serializable {
     return resultado;
      
     }
+
+    /**
+     * @return the sensible
+     */
+    public boolean[] getSensible() {
+        return sensible;
+    }
+
+    /**
+     * @param sensible the sensible to set
+     */
+    public void setSensible(boolean[] sensible) {
+        this.sensible = sensible;
+    }
     
+//    public void changeSensitive(int i) {
+//        System.out.println("Bef: " + Arrays.toString(sensible));
+//        System.out.println("Cambiando " + i + " - " + sensible[i]);
+//        sensible[i] ^= true;
+//        System.out.println("Cambiado - " + sensible[i]);
+//        System.out.println("Aft: " + Arrays.toString(sensible));
+//    }
     
     /**
      * @param ejemploResultado the ejemploResultado to set
@@ -205,6 +230,11 @@ public class DatosController implements Serializable {
         Random r = new Random();
         int alea = r.nextInt(datos.size());
         ejemploResultado = datos.get(alea);
+        sensible = new boolean[cabecera.length];
+        for(int i = 0; i < sensible.length; i++) {
+            sensible[i] = false;
+        }
+        System.out.println("Ini: " + Arrays.toString(sensible));
 
     }
 

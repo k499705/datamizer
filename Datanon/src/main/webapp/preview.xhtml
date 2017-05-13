@@ -7,7 +7,7 @@
     <ui:define name="content">
         <section>
             <f:metadata>
-                <f:viewParam name="id" value="#{datosController.id}" required="false"/>
+                <f:viewParam name="id" value="#{datosController.id}" required="true"/>
                 <f:viewAction action="#{datosController.loadDatos()}" />
             </f:metadata>
 
@@ -42,7 +42,7 @@
                                         <f:selectItem itemValue="Alto" itemLabel="Alto" />
                                     </h:selectOneMenu>
                                 </td>
-                                <td>#{datosController.creaEjemploResultado(cx.index)}</td>
+                                <td>#{datosController.preEjemploResultado(cx.index)}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

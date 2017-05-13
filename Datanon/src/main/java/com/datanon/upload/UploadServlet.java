@@ -14,7 +14,6 @@
  */
 package com.datanon.upload;
 
-import com.datanon.util.ReadConfig;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -23,7 +22,6 @@ import java.nio.file.Paths;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -41,6 +39,7 @@ import javax.servlet.http.Part;
 public class UploadServlet extends HttpServlet {
 
     private static final Logger LOG = Logger.getLogger(UploadServlet.class.getName());
+    private static final String UPLOAD_DIR = "/datanon/uploads/"; // --> Esto nunca se pone a pelo, normalmente se lee de un archivo de configuracion
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -80,13 +79,8 @@ public class UploadServlet extends HttpServlet {
         }
         Random r = new Random();
         filename = r.nextInt(99999) + "_" + filename;
-        String directorio;
-        try{
-        directorio= ReadConfig.readString("directorioupload");
-        }catch (NamingException ex){
-            directorio=ReadConfig.DEFAULT_UPLOADDIR;                  
-        }
-        Path path = Paths.get(directorio + filename);
+
+        Path path = Paths.get(UPLOAD_DIR + filename);
         // Creamos ruta si no existe
         if (!Files.exists(path)) {
             try {

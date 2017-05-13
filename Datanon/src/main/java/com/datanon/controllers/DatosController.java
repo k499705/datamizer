@@ -16,24 +16,13 @@
  */
 package com.datanon.controllers;
 
-import com.datanon.algoritmos.AlgoritmoEstandar;
-import com.datanon.algoritmos.excepciones.ParametroIncorrectoException;
-import com.datanon.datainput.CsvReader;
-import com.datanon.datainput.ExcelReader;
-import com.datanon.datainput.ReaderInterface;
 import com.datanon.util.FileUtils;
-import com.datanon.util.Niveles.Nivel;
-import com.datanon.util.ReadConfig;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
-import javax.naming.NamingException;
 
 /**
  *
@@ -42,8 +31,6 @@ import javax.naming.NamingException;
 @Named(value = "datosController")
 @ViewScoped
 public class DatosController implements Serializable {
-
-    private static final Logger LOG = Logger.getLogger(DatosController.class.getName());
 
     private String id;
     private String[] cabecera;
@@ -105,53 +92,10 @@ public class DatosController implements Serializable {
         return ejemploResultado;
     }
 
-    public String preEjemploResultado(int i) {
+    public String creaEjemploResultado(int i) {
         return ejemploResultado[i];
     }
-    
-    public String posEjemploResultado (int i, String tipo, String nivel) throws ParametroIncorrectoException{
-        
-     Nivel level;
-     
-        switch (nivel){
-            
-           case "LEVE": 
-               level=Nivel.LEVE;
-               break;
-           case "MEDIO":
-               level=Nivel.MEDIO;
-               break;
-           case "ALTO":
-           default:
-               level=Nivel.ALTO;
-               break;          
-        }
-    String resultado;
-    AlgoritmoEstandar a1 = new AlgoritmoEstandar ();
-        switch(tipo){
-            
-            case "Noaccion":
-                resultado= a1.anonNoAccion(ejemploResultado[i],level,false);
-                break;
-            case "Caracter":
-                resultado=a1.anonCaracter(ejemploResultado[i],level,false);
-                break;
-            case "Palabra":
-                resultado=a1.anonPalabra(ejemploResultado[i],level,false);
-                break;
-            case "Edad":
-                resultado=a1.anonEdad(ejemploResultado[i],level,false);
-                break;
-            case "Anontotal":
-            default:
-                resultado=a1.anonTotal(ejemploResultado[i],level,false);
-                break;
-        }
-    return resultado;
-     
-    }
-    
-    
+
     /**
      * @param ejemploResultado the ejemploResultado to set
      */
@@ -164,30 +108,13 @@ public class DatosController implements Serializable {
             // Lanzar excepcion
         }
         String extension = FileUtils.getFilenameExtension(id);
-
-        ReaderInterface lector;
         if (extension.equalsIgnoreCase("csv")) {
-            lector = new CsvReader();// Es CSV
+            // Es CSV
         } else {
-            lector = new ExcelReader();// asumimos que es Excel. Tambien se puede hacer de forma que de error si es una extension desconocida
+            // asumimos que es Excel. Tambien se puede hacer de forma que de error si es una extension desconocida
+
         }
         // Llamar a lector datos = ....;
-        String directorio;
-        try {
-            directorio = ReadConfig.readString("directorioupload");
-        } catch (NamingException ex) {
-            directorio = ReadConfig.DEFAULT_UPLOADDIR;
-        }
-        try {
-            datos = lector.leer(directorio + id);
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, "Error leyendo archivo de datos {0}", ex.toString());
-            //Falta enviar error al usuario
-        }
-        cabecera = datos.get(0);
-        datos.remove(0);
-        
-        /*
         cabecera = new String[3];
         cabecera[0] = "id";
         cabecera[1] = "nombre";
@@ -197,11 +124,9 @@ public class DatosController implements Serializable {
         datos.add(d1);
         String[] d2 = {"456", "Maria", "45"};
         datos.add(d2);
-        */
         Random r = new Random();
         int alea = r.nextInt(datos.size());
         ejemploResultado = datos.get(alea);
-
     }
 
 }

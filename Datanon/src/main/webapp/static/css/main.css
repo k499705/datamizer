@@ -57,3 +57,15 @@ main {
     transition: 0.3s ease-out;
     opacity: 0;
 }
+
+select {
+    padding: 5px;
+}
+
+th {
+    font-size: 1.5em;
+}
+.textocentrado {
+    font-size: 1.5em;
+    text-align: center;
+}

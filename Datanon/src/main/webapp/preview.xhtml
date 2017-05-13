@@ -13,13 +13,14 @@
 
             <h:form id="previewForm" styleClass="preview">
 
-                <table>
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Columna</th>
                             <th>Tipo</th>
                             <th>Nivel</th>
-                            <th>Ejemplo resultado</th>
+                            <th class="textocentrado">Ejemplo no anonimizado</th>
+                            <th class="textocentrado">Ejemplo anonimizado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,7 +43,8 @@
                                         <f:selectItem itemValue="Alto" itemLabel="Alto" />
                                     </h:selectOneMenu>
                                 </td>
-                                <td>#{datosController.preEjemploResultado(cx.index)}</td>
+                                <td class="textocentrado">#{datosController.preEjemploResultado(cx.index)}</td>
+                                <td class="textocentrado">#{datosController.posEjemploResultado(cx.index, "Caracter", "Medio")}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

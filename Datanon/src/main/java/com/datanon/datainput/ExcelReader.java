@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -37,7 +38,10 @@ public class ExcelReader implements ReaderInterface{
                     //String[] fila = new String[row.getLastCellNum()];
                     List<String> fila = new ArrayList<>();
                     for (Cell cell : row) {
-                        fila.add(cell.getStringCellValue());
+                        DataFormatter df = new DataFormatter();
+                        String value = df.formatCellValue(cell);
+                        System.out.println("value:" +value);
+                        fila.add(value);
                     }
                     String[] filaarray = fila.toArray(new String[fila.size()]);
                     rows.add(filaarray);

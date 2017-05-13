@@ -8,10 +8,13 @@
  */
 package com.datanon.modelos;
 
+import java.util.List;
+
 /**
  *
  * @author ammgc
  */
 public interface Modelo {
     
+    public String ejecutar (List<String[]> lista, boolean[] sensibles);
 }

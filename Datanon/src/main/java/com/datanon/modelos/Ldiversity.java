@@ -8,10 +8,40 @@
  */
 package com.datanon.modelos;
 
+import static com.datanon.util.UtilFilas.contarGruposFilas;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author ammgc
  */
 public class Ldiversity implements Modelo {
+        
+    public  List<String[]> borrarBools (List<String[]> lista, boolean[] sensibles){
+        
+        int tamanyo = sensibles.length;        
+        List<String[]> listanueva = new ArrayList<>();
+        for (String[] fila : lista){
+          String [] filanueva = new String[tamanyo];
+          int contador = 0;
+          for (int i=0; i< tamanyo; i++){
+              if (!sensibles[i]){
+                  filanueva[contador] = fila[i];
+                  contador++;
+              }
+          }
+          listanueva.add(filanueva);
+        }
+      return listanueva;  
+    }
     
+    
+    
+    @Override
+    public  String ejecutar (List<String[]> lista, boolean[] sensibles){
+        
+        List<String[]> listanueva = borrarBools(lista,sensibles);
+        return contarGruposFilas(listanueva) + "- Diversity";
+    }
 }

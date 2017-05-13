@@ -8,10 +8,18 @@
  */
 package com.datanon.modelos;
 
+import static com.datanon.util.UtilFilas.contarDuplicados;
+import java.util.List;
+
 /**
  *
  * @author ammgc
  */
 public class Kanonimity implements Modelo {
-    
+ 
+    @Override
+    public  String ejecutar (List<String[]> lista, boolean[] sensibles){
+        
+        return contarDuplicados(lista) + "- Anonimity";
+    }
 }

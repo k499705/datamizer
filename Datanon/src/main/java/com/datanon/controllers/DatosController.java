@@ -110,8 +110,12 @@ public class DatosController implements Serializable {
     }
     
     public String posEjemploResultado (int i, String tipo, String nivel) throws ParametroIncorrectoException{
-        
+    
+//    System.out.println(i + " " + tipo + " " + nivel);
+//    System.out.println("size:" + ejemploResultado.length);
      Nivel level;
+     
+     nivel = nivel.toUpperCase();
      
         switch (nivel){
             

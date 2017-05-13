@@ -106,7 +106,7 @@ public class UploadServlet extends HttpServlet {
         LOG.log(Level.INFO, "Archivo subido: [{0}] en: [{1}]", new Object[]{filename, path.toString()});
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("File successfully uploaded");
+        response.getWriter().write(filename);
     }
 
     /**

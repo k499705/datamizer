@@ -7,7 +7,7 @@
     <ui:define name="content">
         <section>
             <f:metadata>
-                <f:viewParam name="id" value="#{datosController.id}" required="true"/>
+                <f:viewParam name="id" value="#{datosController.id}" required="#{!facesContext.postback}"/>
                 <f:viewAction action="#{datosController.loadDatos()}" />
             </f:metadata>
 
@@ -21,7 +21,7 @@
                             <th>Nivel</th>
                             <th>¿Sensible?</th>
                             <th class="textocentrado">Ejemplo no anonimizado</th>
-                            <th class="textocentrado">Ejemplo anonimizado</th>                           
+                            <th class="textocentrado">Ejemplo anonimizado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,29 +29,31 @@
                             <tr>
                                 <td>#{cab}</td>
                                 <td>
-                                    <h:selectOneMenu value="TIPO" id="formtipo" >
+                                    <h:selectOneMenu value="#{datosController.tipo[cx.index]}" id="formtipo" >
                                         <f:selectItem itemValue="Noaccion" itemLabel="No accion" />
                                         <f:selectItem itemValue="Caracter" itemLabel="Caracter" />
                                         <f:selectItem itemValue="Palabra" itemLabel="Palabra" />
                                         <f:selectItem itemValue="Edad" itemLabel="Edad" />
                                         <f:selectItem itemValue="Anontotal" itemLabel="Anonimizado total" />
+                                        <f:ajax render="@form" execute="@this" />
                                     </h:selectOneMenu>
+                                    <h:outputText id="aaa" value="#{datosController.tipo[cx.index]}"></h:outputText>
                                 </td>
                                 <td>
-                                    <h:selectOneMenu value="NIVEL" id="formnivel" >
+                                    <h:selectOneMenu value="#{datosController.nivel[cx.index]}" id="formnivel" >
                                         <f:selectItem itemValue="Leve" itemLabel="Leve" />
                                         <f:selectItem itemValue="Medio" itemLabel="Medio" />
                                         <f:selectItem itemValue="Alto" itemLabel="Alto" />
+                                        <f:ajax render="@form"  execute="@this" />
                                     </h:selectOneMenu>
                                 </td>
-                                
                                 <td>
                                     <h:selectBooleanCheckbox value="#{datosController.sensible[cx.index]}" id="sensitive">
-                                        <f:ajax render="@form" execute="@form"/>
+                                        <f:ajax render="@form"/>
                                     </h:selectBooleanCheckbox> 
                                 </td>
                                 <td class="textocentrado">#{datosController.preEjemploResultado(cx.index)}</td>
-                                <td class="textocentrado">#{datosController.posEjemploResultado(cx.index, "Caracter", "Medio")}</td>
+                                <td class="textocentrado">#{datosController.posEjemploResultado(cx.index)}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

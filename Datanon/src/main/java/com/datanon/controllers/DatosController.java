@@ -50,6 +50,8 @@ public class DatosController implements Serializable {
     private List<String[]> datos;
     private String[] ejemploResultado;
     private boolean[] sensible;
+    private String[] tipo;
+    private String[] nivel;
 
     /**
      * Creates a new instance of DatosController
@@ -106,57 +108,11 @@ public class DatosController implements Serializable {
         return ejemploResultado;
     }
 
-    public String preEjemploResultado(int i) {
-        //return ejemploResultado[i];
-        if (sensible[i]) {
-            return "true";
-        }
-        else return "false";
-    }
-    
-    public String posEjemploResultado (int i, String tipo, String nivel) throws ParametroIncorrectoException{
-    
-//    System.out.println(i + " " + tipo + " " + nivel);
-//    System.out.println("size:" + ejemploResultado.length);
-     Nivel level;
-     nivel = nivel.toUpperCase();
-
-        switch (nivel){
-            
-           case "LEVE": 
-               level=Nivel.LEVE;
-               break;
-           case "MEDIO":
-               level=Nivel.MEDIO;
-               break;
-           case "ALTO":
-           default:
-               level=Nivel.ALTO;
-               break;          
-        }
-    String resultado;
-    AlgoritmoEstandar a1 = new AlgoritmoEstandar ();
-        switch(tipo){
-            
-            case "Noaccion":
-                resultado= a1.anonNoAccion(ejemploResultado[i],level,false);
-                break;
-            case "Caracter":
-                resultado=a1.anonCaracter(ejemploResultado[i],level,false);
-                break;
-            case "Palabra":
-                resultado=a1.anonPalabra(ejemploResultado[i],level,false);
-                break;
-            case "Edad":
-                resultado=a1.anonEdad(ejemploResultado[i],level,false);
-                break;
-            case "Anontotal":
-            default:
-                resultado=a1.anonTotal(ejemploResultado[i],level,false);
-                break;
-        }
-    return resultado;
-     
+    /**
+     * @param ejemploResultado the ejemploResultado to set
+     */
+    public void setEjemploResultado(String[] ejemploResultado) {
+        this.ejemploResultado = ejemploResultado;
     }
 
     /**
@@ -172,7 +128,35 @@ public class DatosController implements Serializable {
     public void setSensible(boolean[] sensible) {
         this.sensible = sensible;
     }
-    
+
+    /**
+     * @return the tipo
+     */
+    public String[] getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String[] tipo) {
+        this.tipo = tipo;
+    }
+
+    /**
+     * @return the nivel
+     */
+    public String[] getNivel() {
+        return nivel;
+    }
+
+    /**
+     * @param nivel the nivel to set
+     */
+    public void setNivel(String[] nivel) {
+        this.nivel = nivel;
+    }
+
 //    public void changeSensitive(int i) {
 //        System.out.println("Bef: " + Arrays.toString(sensible));
 //        System.out.println("Cambiando " + i + " - " + sensible[i]);
@@ -180,14 +164,6 @@ public class DatosController implements Serializable {
 //        System.out.println("Cambiado - " + sensible[i]);
 //        System.out.println("Aft: " + Arrays.toString(sensible));
 //    }
-    
-    /**
-     * @param ejemploResultado the ejemploResultado to set
-     */
-    public void setEjemploResultado(String[] ejemploResultado) {
-        this.ejemploResultado = ejemploResultado;
-    }
-
     public void loadDatos() {
         if ((id == null) || (id.isEmpty())) {
             // Lanzar excepcion
@@ -215,7 +191,7 @@ public class DatosController implements Serializable {
         }
         cabecera = datos.get(0);
         datos.remove(0);
-        
+
         /*
         cabecera = new String[3];
         cabecera[0] = "id";
@@ -226,16 +202,72 @@ public class DatosController implements Serializable {
         datos.add(d1);
         String[] d2 = {"456", "Maria", "45"};
         datos.add(d2);
-        */
+         */
         Random r = new Random();
         int alea = r.nextInt(datos.size());
         ejemploResultado = datos.get(alea);
         sensible = new boolean[cabecera.length];
-        for(int i = 0; i < sensible.length; i++) {
+        tipo = new String[cabecera.length];
+        nivel = new String[cabecera.length];
+        for (int i = 0; i < cabecera.length; i++) {
             sensible[i] = false;
+            tipo[i] = "Noaccion";
+            nivel[i] = "Leve";
         }
-        System.out.println("Ini: " + Arrays.toString(sensible));
-
     }
 
+    public String preEjemploResultado(int i) {
+        return ejemploResultado[i];
+//        if (sensible[i]) {
+//            return "true";
+//        } else {
+//            return "false";
+//        }
+    }
+
+    public String posEjemploResultado(int i) throws ParametroIncorrectoException {
+
+//    System.out.println(i + " " + tipo + " " + nivel);
+//    System.out.println("size:" + ejemploResultado.length);
+        String sTipo = tipo[i].toUpperCase();
+        String sNivel = nivel[i].toUpperCase();
+        Nivel level;
+
+        switch (sNivel) {
+
+            case "LEVE":
+                level = Nivel.LEVE;
+                break;
+            case "MEDIO":
+                level = Nivel.MEDIO;
+                break;
+            case "ALTO":
+            default:
+                level = Nivel.ALTO;
+                break;
+        }
+        String resultado;
+        AlgoritmoEstandar a1 = new AlgoritmoEstandar();
+        switch (sTipo) {
+
+            case "NOACCION":
+                resultado = a1.anonNoAccion(ejemploResultado[i], level, false);
+                break;
+            case "CARACTER":
+                resultado = a1.anonCaracter(ejemploResultado[i], level, false);
+                break;
+            case "PALABRA":
+                resultado = a1.anonPalabra(ejemploResultado[i], level, false);
+                break;
+            case "EDAD":
+                resultado = a1.anonEdad(ejemploResultado[i], level, false);
+                break;
+            case "ANONTOTAL":
+            default:
+                resultado = a1.anonTotal(ejemploResultado[i], level, false);
+                break;
+        }
+        return resultado;
+
+    }
 }

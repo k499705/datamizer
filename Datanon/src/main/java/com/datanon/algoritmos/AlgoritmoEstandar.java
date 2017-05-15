@@ -10,6 +10,7 @@ package com.datanon.algoritmos;
 
 import com.datanon.algoritmos.excepciones.ParametroIncorrectoException;
 import com.datanon.util.Niveles;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author ammgc
  */
-public class AlgoritmoEstandar implements Niveles, Algoritmo {
+public class AlgoritmoEstandar implements Niveles, Algoritmo, Serializable{
 
     private static final Logger LOG = Logger.getLogger(AlgoritmoEstandar.class.getName());
 
@@ -107,6 +108,10 @@ public class AlgoritmoEstandar implements Niveles, Algoritmo {
     @Override
     public String anonEdad(String valor, Nivel nivel, boolean sensible) throws ParametroIncorrectoException {
 
+        // Modificar, edad, leve --> sin numeros negativos
+        // medio --> que no aparezca el 0s
+        // alto --> crear más rangos
+        
         if (valor == null || valor.isEmpty()) {
             throw new ParametroIncorrectoException("Valor es nulo o vacío");
         }

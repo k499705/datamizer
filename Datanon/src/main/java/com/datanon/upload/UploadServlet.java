@@ -81,10 +81,10 @@ public class UploadServlet extends HttpServlet {
         Random r = new Random();
         filename = r.nextInt(99999) + "_" + filename;
         String directorio;
-        try{
-        directorio= ReadConfig.readString("directorioupload");
-        }catch (NamingException ex){
-            directorio=ReadConfig.DEFAULT_UPLOADDIR;                  
+        try {
+            directorio = ReadConfig.readString("directorioupload");
+        } catch (NamingException ex) {
+            directorio = ReadConfig.DEFAULT_UPLOADDOWNLOADDIR;
         }
         Path path = Paths.get(directorio + filename);
         // Creamos ruta si no existe

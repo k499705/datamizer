@@ -9,6 +9,7 @@
 package com.datanon.modelos;
 
 import static com.datanon.util.UtilFilas.contarGruposFilas;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author ammgc
  */
-public class Ldiversity implements Modelo {
+public class Ldiversity implements Modelo, Serializable {
         
     public  List<String[]> borrarBools (List<String[]> lista, boolean[] sensibles){
         
@@ -43,5 +44,10 @@ public class Ldiversity implements Modelo {
         
         List<String[]> listanueva = borrarBools(lista,sensibles);
         return contarGruposFilas(listanueva) + "- Diversity";
+    }
+    
+    @Override
+    public String getPrintingName (){
+        return "L - Diversity";
     }
 }

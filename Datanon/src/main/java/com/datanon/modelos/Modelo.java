@@ -17,4 +17,5 @@ import java.util.List;
 public interface Modelo {
     
     public String ejecutar (List<String[]> lista, boolean[] sensibles);
+    public String getPrintingName ();
 }

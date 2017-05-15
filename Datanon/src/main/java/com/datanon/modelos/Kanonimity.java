@@ -9,17 +9,30 @@
 package com.datanon.modelos;
 
 import static com.datanon.util.UtilFilas.contarDuplicados;
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  *
  * @author ammgc
  */
-public class Kanonimity implements Modelo {
+public class Kanonimity implements Modelo, Serializable {
  
     @Override
     public  String ejecutar (List<String[]> lista, boolean[] sensibles){
+         System.out.println("Llamando ejecutar()");
+        System.out.println("Nro filas :"+ lista.size());
+        for(String[] s: lista){
+            System.out.println(Arrays.toString(s));
+        }
         
         return contarDuplicados(lista) + "- Anonimity";
+    }
+    
+    @Override
+    public String getPrintingName (){
+    
+        return "K - anonimity";
     }
 }

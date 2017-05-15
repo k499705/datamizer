@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" antiResourceLocking="true" path="/Datanon">
-  <Environment name="directorioupluad" override="false" type="java.lang.String" value="/datanon/uploads/"/>
+  <Environment name="directorioupload" override="false" type="java.lang.String" value="/datanon/uploads/"/>
+  <Environment name="directoriodownload" override="false" type="java.lang.String" value="/datanon/downloads/"/>
 </Context>

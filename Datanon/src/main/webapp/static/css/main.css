@@ -16,8 +16,9 @@ body {
     margin: 0;
     padding: 50px 5px 20px 50px;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 0.9em;
+    font-size: 1.5em;
     color: #2b2b2b;
+    font-size: 12px;
 }
 
 main {
@@ -68,4 +69,35 @@ th {
 .textocentrado {
     font-size: 1.5em;
     text-align: center;
+}
+.botondescarga{
+    position:absolute;
+    bottom:5px;
+    right:10px;
+    padding: 20px;
+    font-size: 2em;
+    border-radius: 5px;
+}
+#modelobox {
+    background-color: #fffbab;
+    padding: 15px;
+    margin: 2px;
+    width: 40%;
+    max-width: 100%;
+    text-align: left;
+    margin-top: 60px;
+    border: 1px solid #c59f1d;
+    
+}
+#formulariomodelo h3 {
+    font-size: 2em;
+}
+
+#formulariomodelo h3{
+    font-size: 1.5em;
+    color: #333;
+    font-style: italic;
+}
+#previewForm td{
+    font-size: 1.2em;
 }

@@ -18,7 +18,7 @@ import javax.naming.NamingException;
  */
 public final class ReadConfig {
     
-    public static final String DEFAULT_UPLOADDIR = "/datanon/uploads/";
+    public static final String DEFAULT_UPLOADDOWNLOADDIR = "/datanon/uploads/";
     private static Context init() throws NamingException {
         Context initCtx = new InitialContext();
         Context envCtx = (Context) initCtx.lookup("java:comp/env");

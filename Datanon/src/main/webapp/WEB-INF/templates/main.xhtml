@@ -11,18 +11,19 @@
         <link rel="shortcut icon" href="static/img/favicon.ico"/>
         <meta name="description" content="Aplicacion para enmascarar datos de caracter personal"/>
         <meta name="author" content="AMM"/>
-        <link rel="stylesheet" href="static/css/main.css"/>
         <link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="static/css/main.css"/>
         <script src="static/js/jquery-3.1.1.min.js"></script>
         <script src="static/js/jquery-ui.min.js" defer="defer"></script>
     </h:head>
     <body>
         <header>
-                <img src="static/img/logo.png" alt="DATANON" />
+            <a href="index.xhtml"><img src="static/img/logo.png" alt="DATANON" /></a>
         </header>
         <main role="main">
             <ui:insert name="content">Content</ui:insert>
-            <h:messages infoClass="msgBox_ok" warnClass="msgBox_warning" errorClass="msgBox_error" globalOnly="true" showDetail="true" showSummary="true" />
+            <h:messages id="msj" infoClass="msjinfo" warnClass="msjwarn" errorClass="msjerror" globalOnly="true" showDetail="true" showSummary="true" />
         </main>
+        <h:outputScript name="jsf.js" library="javax.faces" target="head"/>
     </body>
 </html>

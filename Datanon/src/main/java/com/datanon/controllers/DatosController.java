@@ -107,11 +107,7 @@ public class DatosController implements Serializable {
     }
 
     public String preEjemploResultado(int i) {
-        //return ejemploResultado[i];
-        if (sensible[i]) {
-            return "true";
-        }
-        else return "false";
+        return ejemploResultado[i];
     }
     
     public String posEjemploResultado (int i, String tipo, String nivel) throws ParametroIncorrectoException{

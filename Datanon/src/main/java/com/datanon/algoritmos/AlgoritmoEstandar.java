@@ -11,16 +11,21 @@ package com.datanon.algoritmos;
 import com.datanon.algoritmos.excepciones.ParametroIncorrectoException;
 import com.datanon.util.Niveles;
 import java.io.Serializable;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.CRC32;
 
 /**
  *
  * @author ammgc
  */
-public class AlgoritmoEstandar implements Niveles, Algoritmo, Serializable{
+public class AlgoritmoEstandar implements Niveles, Algoritmo, Serializable {
 
     private static final Logger LOG = Logger.getLogger(AlgoritmoEstandar.class.getName());
+    private static final String MASCARA = "*";
+    private static final int RANGO_EDAD = 3;
+    private final String SEPARATOR = "//";
 
     @Override
     public String anonTotal(String valor, Nivel nivel, boolean sensible) {
@@ -45,13 +50,13 @@ public class AlgoritmoEstandar implements Niveles, Algoritmo, Serializable{
         switch (nivel) {
 
             case LEVE:
-                anonimizado = valor.substring(0, valor.length() - 1) + "*";
+                anonimizado = valor.substring(0, valor.length() - 1) + MASCARA;
                 break;
 
             case MEDIO:
                 anonimizado = valor.substring(0, valor.length() / 2);
                 for (int i = 0; i <= (valor.length() / 2); i++) {
-                    anonimizado = anonimizado + "*";
+                    anonimizado = anonimizado + MASCARA;
                 }
                 break;
 
@@ -59,7 +64,7 @@ public class AlgoritmoEstandar implements Niveles, Algoritmo, Serializable{
             default:
                 anonimizado = valor.substring(0, 1);
                 for (int i = 1; i <= (valor.length()); i++) {
-                    anonimizado = anonimizado + "*";
+                    anonimizado = anonimizado + MASCARA;
                 }
                 break;
         }
@@ -84,19 +89,19 @@ public class AlgoritmoEstandar implements Niveles, Algoritmo, Serializable{
         switch (nivel) {
 
             case LEVE:
-                palabras[palabras.length-1]="*";               
+                palabras[palabras.length - 1] = MASCARA;
                 break;
 
-            case MEDIO:              
+            case MEDIO:
                 for (int i = (palabras.length / 2); i < palabras.length; i++) {
-                    palabras[i] = "*";
+                    palabras[i] = MASCARA;
                 }
                 break;
 
             case ALTO:
             default:
                 for (int i = 1; i < palabras.length; i++) {
-                    palabras[i] = "*";
+                    palabras[i] = MASCARA;
                 }
                 break;
 
@@ -111,12 +116,11 @@ public class AlgoritmoEstandar implements Niveles, Algoritmo, Serializable{
         // Modificar, edad, leve --> sin numeros negativos
         // medio --> que no aparezca el 0s
         // alto --> crear más rangos
-        
         if (valor == null || valor.isEmpty()) {
             throw new ParametroIncorrectoException("Valor es nulo o vacío");
         }
         int anonimizadoint;
-        String anonimizado="-";
+        String anonimizado = "-";
         try {
             anonimizadoint = Integer.parseInt(valor);
         } catch (NumberFormatException ex) {
@@ -124,40 +128,46 @@ public class AlgoritmoEstandar implements Niveles, Algoritmo, Serializable{
             throw new ParametroIncorrectoException("Valor no es una Edad");
         }
 
-        if (anonimizadoint >= 1 && anonimizadoint <= 120){
-            
+        if (anonimizadoint >= 0 && anonimizadoint <= 120) {
+
             switch (nivel) {
-            
-             case LEVE: 
-                anonimizado = String.valueOf(anonimizadoint-3) + "-" + String.valueOf(anonimizadoint+3);
-                break;
-                
-             case MEDIO: 
-                 int result;
-                 
-                 result = anonimizadoint/10;
-                 result *= 10;
-                 anonimizado = String.valueOf(result)+"s";
-                 break;
-                 
-             case ALTO:
-                 
-                 if (anonimizadoint < 20) {
-                     anonimizado = "< 20";
-                 }
-                 if (anonimizadoint < 50) {
-                     anonimizado = "< 50";
-                 }
-                 if (anonimizadoint < 70) {
-                     anonimizado = "< 70";
-                 }
-                 else{
-                 anonimizado = "> 70";
-                 }
-                 break;
+
+                case LEVE:
+                    int max = anonimizadoint + RANGO_EDAD;
+                    int min = anonimizadoint - RANGO_EDAD;
+                    if (min < 0) {
+                        min = 0;
+                    }
+                    anonimizado = min + "-" + max;
+                    break;
+
+                case MEDIO:
+                    int result;
+
+                    result = anonimizadoint / 10;
+                    result *= 10;
+                    if (result == 0) {
+                        anonimizado = "< 10";
+                    } else {
+                        anonimizado = result + "s";
+                    }
+                    break;
+
+                case ALTO:
+
+                    if (anonimizadoint < 20) {
+                        anonimizado = "< 20";
+                    } else if (anonimizadoint < 50) {
+                        anonimizado = "< 50";
+                    } else if (anonimizadoint < 70) {
+                        anonimizado = "< 70";
+                    } else {
+                        anonimizado = "> 70";
+                    }
+                    break;
             }
         }
-/*
+        /*
             case LEVE:
                 if (anonimizadoint >= 1 && anonimizadoint <= 120) { //Es una edad
                     if (anonimizadoint < 100) {                      //Si la edad es menor que 100 anonimizo el segundo digito
@@ -196,10 +206,33 @@ public class AlgoritmoEstandar implements Niveles, Algoritmo, Serializable{
                 break;
 
         }
-*/
+         */
         return anonimizado;
 
     }
 
     // public  String anonNumeros (String valor, Nivel nivel, boolean sensible) throws NumberFormatException{
+    @Override
+    public String anonIdentificador(String valor, String[] aux, Nivel nivel, boolean sensible) throws ParametroIncorrectoException {
+        if (valor == null || valor.isEmpty()) {
+            throw new ParametroIncorrectoException("Valor es nulo o vacío");
+        }
+        String anonimizado = "-";
+        Random r = new Random();
+        String filaUnida = String.join(SEPARATOR, aux);
+        LOG.log(Level.INFO, "Fila unida: [{0}]", filaUnida);
+        switch (nivel) {
+            case LEVE:
+                anonimizado = anonCaracter(valor, nivel, sensible).replace(MASCARA, "") + r.nextInt(100);
+                break;
+            case ALTO:
+                filaUnida = filaUnida + r.nextInt(100000);
+            case MEDIO:
+                CRC32 crc = new CRC32();
+                crc.update(filaUnida.getBytes());
+                anonimizado = Long.toString( crc.getValue() );
+                break;
+        }
+        return anonimizado;
+    }
 }

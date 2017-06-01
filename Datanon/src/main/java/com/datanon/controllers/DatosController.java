@@ -39,6 +39,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -62,6 +63,7 @@ public class DatosController implements Serializable {
     private String id;
     private String[] cabecera;
     private List<String[]> datos;
+    private String[] ejemploResultadoOrg;
     private String[] ejemploResultado;
     private boolean[] sensible;
     private String[] tipo;
@@ -275,6 +277,7 @@ public class DatosController implements Serializable {
         Random r = new Random();
         int alea = r.nextInt(datos.size());
         ejemploResultado = datos.get(alea);
+        ejemploResultadoOrg = Arrays.copyOf(ejemploResultado, ejemploResultado.length);
         sensible = new boolean[cabecera.length];
         tipo = new String[cabecera.length];
         nivel = new String[cabecera.length];
@@ -311,6 +314,9 @@ public class DatosController implements Serializable {
                 break;
             case "EDAD":
                 resultado = algoritmo.anonEdad(ejemploResultado[i], level, false);
+                break;
+            case "IDENTIFICADOR":
+                resultado = algoritmo.anonIdentificador(ejemploResultadoOrg[i], ejemploResultadoOrg, level, false);
                 break;
             case "ANONTOTAL":
             default:
@@ -355,6 +361,9 @@ public class DatosController implements Serializable {
                     case "EDAD":
                         filanueva[i] = algoritmo.anonEdad(fila[i], UtilFilas.stringToNivel(nivel[i]), false);
                         break;
+                    case "IDENTIFICADOR":
+                        filanueva[i] = algoritmo.anonIdentificador(fila[i], fila, UtilFilas.stringToNivel(nivel[i]), false);
+                        break;
                     case "ANONTOTAL":
                     default:
                         filanueva[i] = algoritmo.anonTotal(fila[i], UtilFilas.stringToNivel(nivel[i]), false);
@@ -365,6 +374,10 @@ public class DatosController implements Serializable {
 
         }
         return datosProcesados;
+    }
+
+    private void obtenerFila(int i, String separador) {
+
     }
 
     public void download() throws IOException, ParametroIncorrectoException {

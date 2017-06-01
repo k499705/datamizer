@@ -22,6 +22,7 @@ public interface Algoritmo {
     public String anonCaracter (String valor, Niveles.Nivel nivel, boolean sensible) throws ParametroIncorrectoException;
     public String anonPalabra (String valor, Niveles.Nivel nivel, boolean sensible) throws ParametroIncorrectoException;
     public String anonEdad (String valor, Niveles.Nivel nivel, boolean sensible) throws ParametroIncorrectoException;
+    public String anonIdentificador (String valor, String[] aux, Niveles.Nivel nivel, boolean sensible) throws ParametroIncorrectoException;
     
     
     
